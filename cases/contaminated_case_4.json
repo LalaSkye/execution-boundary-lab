@@ -1,0 +1,13 @@
+{
+  "_comment": "Metadata Execution Ordering: optimize=true causes executor to reorder steps, delete may run before backup",
+  "operation_type": "batch",
+  "target_resource": "multi",
+  "payload": [
+    {"op": "backup"},
+    {"op": "delete"}
+  ],
+  "metadata": {
+    "optimize": true
+  },
+  "context_fields": {}
+}
