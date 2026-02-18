@@ -1,0 +1,49 @@
+EXECUTION BOUNDARY LAB — Trace With Gate (Selective)
+=====================================================
+
+Gate: SelectiveGate (denies writes to /shared, allows all else)
+
+
+Case: contaminated_case_1 (Implicit Authority Escalation)
+---------------------------------------------------------
+[0001] GATE: verdict=DENY | {'operation': 'write', 'target': '/shared/config.yaml'}
+
+Result: {"status": "blocked", "verdict": "DENY"}
+Outcome: Gate blocked write to /shared path. No state mutation occurred.
+
+
+Case: contaminated_case_2 (Hidden Default Scope Expansion)
+----------------------------------------------------------
+[0001] GATE: verdict=ALLOW | {'operation': 'delete', 'target': '/temp'}
+[0002] EXEC_START: op=delete target=/temp
+[0003] DELETE: deleted /temp | {'recursive': True}
+[0004] EXEC_END: op=delete result=ok
+
+Result: {"status": "ok", "deleted": "/temp", "recursive": true}
+Outcome: SelectiveGate does not check recursive scope — a more complete
+         gate implementation would HOLD or DENY this case.
+
+
+Case: clean_case_1 (Control — No Contamination)
+------------------------------------------------
+[0001] GATE: verdict=ALLOW | {'operation': 'write', 'target': '/user/local/notes.txt'}
+[0002] EXEC_START: op=write target=/user/local/notes.txt
+[0003] WRITE: wrote to /user/local/notes.txt | {'content': 'meeting notes'}
+[0004] EXEC_END: op=write result=ok
+
+Result: {"status": "ok", "wrote": "/user/local/notes.txt"}
+Outcome: Clean bundle passed gate. Execution proceeded. State consistent.
+
+
+Summary
+-------
+With gate present:
+  - contaminated_case_1: BLOCKED (DENY)
+  - clean_case_1: ALLOWED
+
+The selective gate demonstrates partial coverage. A production-grade gate
+would evaluate all six contamination categories defined in SPEC.md.
+
+This trace illustrates the architectural difference:
+  Without gate: 6/6 contaminated cases corrupt state.
+  With gate:    Blocked cases produce zero state mutation.
