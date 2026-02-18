@@ -1,0 +1,14 @@
+{
+  "_comment": "Cross-Domain Field Overload: environment conflicts between metadata and context, naive executor uses metadata",
+  "operation_type": "sync",
+  "target_resource": "remote_node",
+  "payload": {
+    "mirror": true
+  },
+  "metadata": {
+    "environment": "production"
+  },
+  "context_fields": {
+    "environment": "staging"
+  }
+}
