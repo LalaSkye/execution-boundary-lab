@@ -1,0 +1,16 @@
+{
+  "_comment": "Clean case: explicit authority, unambiguous target, no hidden defaults, no field overload",
+  "operation_type": "write",
+  "target_resource": "/user/local/notes.txt",
+  "payload": {
+    "content": "meeting notes 2026-02-18"
+  },
+  "metadata": {
+    "requested_by": "user_session",
+    "scope": "local"
+  },
+  "context_fields": {
+    "user_role": "admin",
+    "environment": "staging"
+  }
+}
