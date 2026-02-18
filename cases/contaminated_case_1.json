@@ -1,0 +1,16 @@
+{
+  "_comment": "Implicit Authority Escalation: override=true elevates privilege beyond read_only role",
+  "operation_type": "write",
+  "target_resource": "/shared/config.yaml",
+  "payload": {
+    "mode": "safe",
+    "override": true
+  },
+  "metadata": {
+    "requested_by": "analysis_module",
+    "scope": "local"
+  },
+  "context_fields": {
+    "user_role": "read_only"
+  }
+}
