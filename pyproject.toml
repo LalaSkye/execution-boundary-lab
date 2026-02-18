@@ -1,0 +1,15 @@
+[project]
+name = "execution-boundary-lab"
+version = "0.1.0"
+description = "Demonstrates how information pre-positioning causes cascading execution failures"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-v --tb=short"
