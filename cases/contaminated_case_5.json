@@ -1,0 +1,11 @@
+{
+  "_comment": "Descriptive Field Side Effects: priority=critical triggers log rotation, deleting older logs",
+  "operation_type": "write",
+  "target_resource": "/logs/system.log",
+  "payload": {
+    "message": "rotation",
+    "priority": "critical"
+  },
+  "metadata": {},
+  "context_fields": {}
+}
