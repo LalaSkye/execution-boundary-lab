@@ -154,7 +154,7 @@ class TestGatedExecution:
         trace = self.logger.get_trace()
         gate_events = [e for e in trace if e["event"] == "GATE"]
         assert len(gate_events) >= 1
-        assert "DENY" in gate_events[0]["message"]
+        assert "DENY" in gate_events[0]["detail"]
 
 
 # ---------------------------------------------------------------------------
