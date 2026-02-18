@@ -1,0 +1,10 @@
+{
+  "_comment": "Hidden Default Scope Expansion: recursive flag buried in context silently broadens destructive scope",
+  "operation_type": "delete",
+  "target_resource": "/temp",
+  "payload": {},
+  "metadata": {},
+  "context_fields": {
+    "recursive": true
+  }
+}
