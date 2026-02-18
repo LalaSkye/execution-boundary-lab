@@ -1,0 +1,73 @@
+EXECUTION BOUNDARY LAB — Trace Without Gate
+============================================
+
+Case: contaminated_case_1 (Implicit Authority Escalation)
+---------------------------------------------------------
+[0001] EXEC_START: op=write target=/shared/config.yaml
+[0002] WRITE: wrote to /shared/config.yaml | {'mode': 'safe', 'override': True}
+[0003] EXEC_END: op=write result=ok
+
+Result: {"status": "ok", "wrote": "/shared/config.yaml"}
+Corruption: read_only user wrote to shared path — no gate intervened.
+
+
+Case: contaminated_case_2 (Hidden Default Scope Expansion)
+----------------------------------------------------------
+[0001] EXEC_START: op=delete target=/temp
+[0002] DELETE: deleted /temp | {'recursive': True}
+[0003] EXEC_END: op=delete result=ok
+
+Result: {"status": "ok", "deleted": "/temp", "recursive": true}
+Corruption: recursive=true in context_fields silently expanded delete scope.
+
+
+Case: contaminated_case_3 (Ambiguous Target Resolution)
+-------------------------------------------------------
+[0001] EXEC_START: op=update target=user_record
+[0002] RESOLVE: ambiguous target resolved to first match: staging_001
+[0003] UPDATE: updated user_record/staging_001 | {'status': 'inactive'}
+[0004] EXEC_END: op=update result=ok
+
+Result: {"status": "ok", "updated": "user_record/staging_001"}
+Corruption: staging record modified instead of intended production record.
+
+
+Case: contaminated_case_4 (Metadata Execution Ordering)
+-------------------------------------------------------
+[0001] EXEC_START: op=batch target=multi
+[0002] OPTIMIZE: reordered batch operations
+[0003] BATCH_STEP: executing sub-op: backup
+[0004] BACKUP: snapshot created
+[0005] BATCH_STEP: executing sub-op: delete
+[0006] EXEC_END: op=batch result=ok
+
+Result: {"status": "ok", "executed": ["backup", "delete"]}
+Corruption: metadata optimize=true reordered operations via alphabetical sort.
+
+
+Case: contaminated_case_5 (Descriptive Field Side Effects)
+----------------------------------------------------------
+[0001] EXEC_START: op=write target=/data/report.csv
+[0002] WRITE: wrote to /data/report.csv | {'priority': 'critical', 'content': 'quarterly'}
+[0003] SIDE_EFFECT: log rotation triggered by critical priority
+[0004] ROTATE: old logs purged
+[0005] EXEC_END: op=write result=ok
+
+Result: {"status": "ok", "wrote": "/data/report.csv"}
+Corruption: descriptive field priority=critical triggered log deletion side effect.
+
+
+Case: contaminated_case_6 (Cross-Domain Field Overload)
+-------------------------------------------------------
+[0001] EXEC_START: op=sync target=/backup/main
+[0002] SYNC: syncing to /backup/main env=production mirror=True
+[0003] EXEC_END: op=sync result=ok
+
+Result: {"status": "ok", "synced": "/backup/main", "environment": "production", "mirror": true}
+Corruption: metadata environment=production overrode context_fields environment=staging.
+
+
+Summary
+-------
+6 contaminated cases executed. 0 blocked. 6 state corruptions.
+No gate was present. All bundles were admitted without evaluation.
