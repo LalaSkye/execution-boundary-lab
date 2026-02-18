@@ -1,0 +1,12 @@
+{
+  "_comment": "Ambiguous Target Resolution: user_record resolves to first match, could hit wrong environment",
+  "operation_type": "update",
+  "target_resource": "user_record",
+  "payload": {
+    "status": "inactive"
+  },
+  "metadata": {
+    "user_id": null
+  },
+  "context_fields": {}
+}
