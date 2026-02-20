@@ -1,3 +1,5 @@
+![CI](https://github.com/LalaSkye/execution-boundary-lab/actions/workflows/ci.yml/badge.svg)
+
 # execution_boundary_lab
 
 ## Purpose
