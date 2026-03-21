@@ -1,0 +1,11 @@
+{
+  "artefact": "LINKEDIN_THREAD_PROOF_v1.2",
+  "class": "NON_EXEC_RECORD",
+  "origin": "public_linkedin_discussion",
+  "core_invariant": "execution_requires_decision",
+  "drift_detected": true,
+  "drift_type": "vocabulary_without_enforcement",
+  "replayable": true,
+  "execution_binding": false,
+  "status": "stable"
+}
