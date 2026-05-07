@@ -1,0 +1,9 @@
+{
+  "authority_id": "auth-002",
+  "issued_at": "2026-04-01T10:00:00Z",
+  "valid_until": "2026-04-05T10:00:00Z",
+  "scope": "bind:example",
+  "revoked": false,
+  "checkable": true,
+  "description": "Example of an authority that existed but is no longer current at bind time."
+}
