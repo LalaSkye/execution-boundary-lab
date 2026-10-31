@@ -1,0 +1,69 @@
+{
+  "title": "Twenty-Coin Test — illustrative local reference fixture",
+  "timestamp_utc": "2026-10-31T08:32:12.024368+00:00",
+  "scope": "Local self-authored Python fixture. NOT an integration test of Harmonic or Tim's implementation.",
+  "results": [
+    {
+      "case": "baseline_valid",
+      "expected": "ALLOW",
+      "observed": "ALLOW",
+      "pass": true,
+      "authorised_at_commit": true,
+      "writer_entered": true,
+      "protected_state_changed": true,
+      "purchase_count": 1
+    },
+    {
+      "case": "price_25_coins",
+      "expected": "HOLD",
+      "observed": "HOLD",
+      "pass": true,
+      "authorised_at_commit": false,
+      "writer_entered": false,
+      "protected_state_changed": false,
+      "purchase_count": 0
+    },
+    {
+      "case": "merchant_changed",
+      "expected": "HOLD",
+      "observed": "HOLD",
+      "pass": true,
+      "authorised_at_commit": false,
+      "writer_entered": false,
+      "protected_state_changed": false,
+      "purchase_count": 0
+    },
+    {
+      "case": "cancelled_before_commit",
+      "expected": "HOLD",
+      "observed": "HOLD",
+      "pass": true,
+      "authorised_at_commit": false,
+      "writer_entered": false,
+      "protected_state_changed": false,
+      "purchase_count": 0
+    },
+    {
+      "case": "items_substituted",
+      "expected": "HOLD",
+      "observed": "HOLD",
+      "pass": true,
+      "authorised_at_commit": false,
+      "writer_entered": false,
+      "protected_state_changed": false,
+      "purchase_count": 0
+    },
+    {
+      "case": "limit_lowered_before_commit",
+      "expected": "HOLD",
+      "observed": "HOLD",
+      "pass": true,
+      "authorised_at_commit": false,
+      "writer_entered": false,
+      "protected_state_changed": false,
+      "purchase_count": 0
+    }
+  ],
+  "passed": 6,
+  "total": 6
+}
